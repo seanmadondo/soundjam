@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+
+import {
+  ThemeProvider as MuiThemeProvider,
+  Container,
+} from "@material-ui/core";
+import { ThemeProvider } from "@emotion/react";
+import theme from "./Styles/theme";
+
+import { NavigationBar } from "./components/NavigationBar";
+import { Board } from "./components/Board";
+//========================================================================================
+//Apollo Client setup for API
+const createApolloClient = () => {
+  return new ApolloClient({
+    link: new HttpLink({
+      uri: "https://w6tcrg3sb4.execute-api.us-east-1.amazonaws.com/example-example-graphql-api",
+      headers: {
+        Authorization: "5152fa08-1806-4514-9f66-730e9b59486e",
+        "Content-Type": "application/json",
+      },
+    }),
+    cache: new InMemoryCache(),
+  });
+};
+//========================================================================================
+
+const App = () => {
+  const client = createApolloClient();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <Container maxWidth="lg">
+            <NavigationBar />
+            <Board />
+          </Container>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;
