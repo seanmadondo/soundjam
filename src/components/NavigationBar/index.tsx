@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import { AppBar, Toolbar } from "@material-ui/core";
-import AddBoxIcon from "@material-ui/icons/AddBox";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 import dweebLogo from "../../images/dweebLogo.png";
@@ -19,6 +19,7 @@ export const NavigationBar = (): JSX.Element => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <div
@@ -26,6 +27,7 @@ export const NavigationBar = (): JSX.Element => {
             "img:hover": {
               transform: "rotate(360deg)",
               transition: "transform .9s ease-in-out",
+              justifyContent: "flex-start",
             },
           })}
         >
@@ -42,8 +44,9 @@ export const NavigationBar = (): JSX.Element => {
         <div css={{ marginLeft: "20px" }}>
           <h1 css={{ fontFamily: "'Baloo 2', cursive" }}>dweeb</h1>
         </div>
+
         <Toolbar css={{ marginLeft: "68%" }}>
-          <AddBoxIcon
+          <AddCircleIcon
             css={css({
               fontSize: "40px !important",
               "&:hover": {
@@ -65,7 +68,6 @@ export const NavigationBar = (): JSX.Element => {
           />
         </Toolbar>
       </div>
-      <div></div>
     </AppBar>
   );
 };
