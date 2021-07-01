@@ -19,7 +19,7 @@ export const NavigationBar = (): JSX.Element => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
         }}
       >
         <div
@@ -41,32 +41,40 @@ export const NavigationBar = (): JSX.Element => {
             alt="logo"
           />
         </div>
-        <div css={{ marginLeft: "20px" }}>
+        <div css={{ paddingLeft: "10px" }}>
           <h1 css={{ fontFamily: "'Baloo 2', cursive" }}>dweeb</h1>
         </div>
 
-        <Toolbar css={{ marginLeft: "68%" }}>
-          <AddCircleIcon
-            css={css({
-              fontSize: "40px !important",
-              "&:hover": {
-                transform: "scale(1.25)",
-                transition: "all 0.2s",
-              },
-            })}
-          />
-        </Toolbar>
-        <Toolbar>
-          <Brightness4Icon
-            css={{
-              fontSize: "40px !important",
-              "&:hover": {
-                transform: "scale(1.25)",
-                transition: "all 0.2s",
-              },
-            }}
-          />
-        </Toolbar>
+        <div
+          css={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Toolbar>
+            <AddCircleIcon
+              css={css({
+                fontSize: "40px !important",
+                "&:hover": {
+                  transform: "scale(1.25)",
+                  transition: "all 0.2s",
+                },
+              })}
+            />
+          </Toolbar>
+          <Toolbar>
+            <Brightness4Icon
+              css={{
+                fontSize: "40px !important",
+                "&:hover": {
+                  transform: "scale(1.25)",
+                  transition: "all 0.2s",
+                },
+              }}
+            />
+          </Toolbar>
+        </div>
       </div>
     </AppBar>
   );
