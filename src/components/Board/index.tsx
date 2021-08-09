@@ -9,7 +9,7 @@ export const Board = (): JSX.Element => {
   return (
     <Box pt={3}>
       <Paper
-        css={{ borderRadius: "10px", paddingBottom: "15px" }}
+        css={{ borderRadius: "10px", paddingBottom: "30px" }}
         elevation={2}
       >
         <div
