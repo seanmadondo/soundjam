@@ -1,15 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import { Paper, Box, Container } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-
-import { Ticket } from "../Ticket";
+import { Paper, Box } from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import { BoardGrid } from "../Board/BoardGrid";
 
 export const Board = (): JSX.Element => {
   return (
     <Box pt={3}>
-      <Paper css={{ height: "300px", borderRadius: "10px" }} elevation={2}>
+      <Paper
+        css={{ borderRadius: "10px", paddingBottom: "15px" }}
+        elevation={2}
+      >
         <div
           css={{
             display: "flex",
@@ -25,10 +27,10 @@ export const Board = (): JSX.Element => {
               fontFamily: "'Baloo 2', cursive",
             }}
           >
-            Board title here
+            Level 1
           </h3>
           <div css={{ justifyContent: "flex-end", paddingRight: "30px" }}>
-            <AddCircleIcon
+            <HelpIcon
               css={css({
                 "&:hover": {
                   transform: "scale(1.25)",
@@ -38,9 +40,7 @@ export const Board = (): JSX.Element => {
             />
           </div>
         </div>
-        <Container>
-          <Ticket />
-        </Container>
+        <BoardGrid />
       </Paper>
     </Box>
   );

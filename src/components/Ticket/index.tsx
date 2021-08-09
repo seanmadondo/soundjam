@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-// import { css } from "@emotion/react";
 
 import {
   Box,
@@ -9,23 +8,40 @@ import {
   CardActions,
 } from "@material-ui/core";
 
+import J from "../../images/J.png";
+
 export const Ticket = (): JSX.Element => {
   return (
     <Box>
       <Card
         css={{
-          width: "20%",
+          width: "225px",
           borderRadius: "10px",
           fontFamily: "'Baloo 2', cursive",
+          marginLeft: "10px",
+          marginBottom: "10px",
+          "&:hover": {
+            transform: "scale(1.02)",
+            boxShadow: "0 1px 3px 3px #FF914D",
+            transition: "all 0.3s",
+          },
         }}
       >
-        <CardHeader title="Ticket Title" disableTypography />
+        <CardHeader title="" disableTypography />
         <CardContent>
-          <div>Description to go here</div>
+          <img
+            css={{
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+              width: "40x",
+              height: "40px",
+            }}
+            src={J}
+            alt="J"
+          />
         </CardContent>
-        <CardActions>
-          <div>Actions to go here</div>
-        </CardActions>
+        <CardActions></CardActions>
       </Card>
     </Box>
   );

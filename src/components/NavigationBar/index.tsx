@@ -2,10 +2,8 @@
 import { css } from "@emotion/react";
 
 import { AppBar, Toolbar } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
 
-import dweebLogo from "../../images/dweebLogo.png";
+import SoundJam from "../../images/SoundJam.png";
 
 export const NavigationBar = (): JSX.Element => {
   return (
@@ -25,8 +23,8 @@ export const NavigationBar = (): JSX.Element => {
         <div
           css={css({
             "img:hover": {
-              transform: "rotate(360deg)",
-              transition: "transform .9s ease-in-out",
+              transform: "scale(1.1)",
+              transition: "all 0.2s",
               justifyContent: "flex-start",
             },
           })}
@@ -34,15 +32,12 @@ export const NavigationBar = (): JSX.Element => {
           <img
             css={css({
               paddingLeft: "15px",
-              width: "60px",
-              height: "60px",
+              width: "215px",
+              height: "105px",
             })}
-            src={dweebLogo}
-            alt="logo"
+            src={SoundJam}
+            alt="SoundJam"
           />
-        </div>
-        <div css={{ paddingLeft: "10px" }}>
-          <h1 css={{ fontFamily: "'Baloo 2', cursive" }}>dweeb</h1>
         </div>
 
         <div
@@ -53,26 +48,13 @@ export const NavigationBar = (): JSX.Element => {
           }}
         >
           <Toolbar>
-            <AddCircleIcon
-              css={css({
-                fontSize: "40px !important",
-                "&:hover": {
-                  transform: "scale(1.25)",
-                  transition: "all 0.2s",
-                },
-              })}
-            />
-          </Toolbar>
-          <Toolbar>
-            <Brightness4Icon
+            <div
               css={{
-                fontSize: "40px !important",
-                "&:hover": {
-                  transform: "scale(1.25)",
-                  transition: "all 0.2s",
-                },
+                fontFamily: "'Baloo 2', cursive",
               }}
-            />
+            >
+              Score:
+            </div>
           </Toolbar>
         </div>
       </div>
