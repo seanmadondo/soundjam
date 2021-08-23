@@ -56,6 +56,16 @@ export const NavigationBar = (): JSX.Element => {
               Score:
             </div>
           </Toolbar>
+          <Toolbar>
+            <div
+              css={{
+                fontFamily: "'Baloo 2', cursive",
+                fontSize: "50px",
+              }}
+            >
+              0
+            </div>
+          </Toolbar>
         </div>
       </div>
     </AppBar>

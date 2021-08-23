@@ -2,6 +2,10 @@
 import { Container } from "@material-ui/core";
 import { Ticket } from "../../Ticket";
 
+import store from "../../../stores/TicketStore";
+
+console.log(store.getTickets);
+
 export const BoardGrid = () => {
   return (
     <Container
