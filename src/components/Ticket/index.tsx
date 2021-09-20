@@ -17,7 +17,7 @@ export const Ticket = (): JSX.Element => {
         css={{
           width: "225px",
           borderRadius: "10px",
-          fontFamily: "'Baloo 2', cursive",
+          fontFamily: "Baloo 2",
           marginLeft: "10px",
           marginBottom: "10px",
           "&:hover": {

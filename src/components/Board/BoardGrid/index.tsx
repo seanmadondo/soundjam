@@ -2,11 +2,20 @@
 import { Container } from "@material-ui/core";
 import { Ticket } from "../../Ticket";
 
-import store from "../../../stores/TicketStore";
+import { useRootStore } from "../../../stores/RootStateContext";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
-console.log(store.getTickets);
+export const BoardGrid = observer(() => {
+  const ticketStore = useRootStore();
 
-export const BoardGrid = () => {
+  useEffect(() => {
+    const the_tickets = ticketStore.ticketStore.tickets.map(
+      (ticket) => ticket.title + ""
+    );
+    console.log(the_tickets);
+  }, [ticketStore]);
+
   return (
     <Container
       css={{
@@ -32,4 +41,4 @@ export const BoardGrid = () => {
       <Ticket />
     </Container>
   );
-};
+});

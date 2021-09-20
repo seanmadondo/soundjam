@@ -16,6 +16,7 @@ import theme from "./Styles/theme";
 
 import { NavigationBar } from "./components/NavigationBar";
 import { Board } from "./components/Board";
+
 //========================================================================================
 //Apollo Client setup for API
 const createApolloClient = () => {
@@ -34,6 +35,7 @@ const createApolloClient = () => {
 
 const App = () => {
   const client = createApolloClient();
+
   return (
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
