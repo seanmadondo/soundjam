@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   ApolloClient,
@@ -16,6 +16,7 @@ import theme from "./Styles/theme";
 
 import { NavigationBar } from "./components/NavigationBar";
 import { Board } from "./components/Board";
+import { useRootStore } from "./stores/RootStateContext";
 
 //========================================================================================
 //Apollo Client setup for API
@@ -35,13 +36,20 @@ const createApolloClient = () => {
 
 const App = () => {
   const client = createApolloClient();
+  const ticketStore = useRootStore();
+
+  useEffect(() => {
+    ticketStore.ticketStore.getScore();
+  }, [ticketStore]);
+
+  const score = ticketStore.ticketStore.getScore();
 
   return (
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <Container maxWidth="lg">
-            <NavigationBar />
+            <NavigationBar score={score} />
             <Board />
           </Container>
         </ThemeProvider>

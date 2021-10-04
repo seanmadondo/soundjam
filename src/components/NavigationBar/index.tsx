@@ -5,7 +5,11 @@ import { AppBar, Toolbar } from "@material-ui/core";
 
 import SoundJam from "../../images/SoundJam.png";
 
-export const NavigationBar = (): JSX.Element => {
+interface NavigationBarProps {
+  score: number;
+}
+
+export const NavigationBar = ({ score }: NavigationBarProps): JSX.Element => {
   return (
     <AppBar
       css={{ borderRadius: "10px" }}
@@ -63,7 +67,7 @@ export const NavigationBar = (): JSX.Element => {
                 fontSize: "50px",
               }}
             >
-              0
+              {score}
             </div>
           </Toolbar>
         </div>

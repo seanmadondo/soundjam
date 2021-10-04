@@ -10,7 +10,13 @@ import {
 
 import J from "../../images/J.png";
 
-export const Ticket = (): JSX.Element => {
+interface ticketProps {
+  title: string;
+  status: string;
+  sound: string;
+}
+
+export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
   return (
     <Box>
       <Card
@@ -41,7 +47,7 @@ export const Ticket = (): JSX.Element => {
             alt="J"
           />
         </CardContent>
-        <CardActions></CardActions>
+        <CardActions>{title}</CardActions>
       </Card>
     </Box>
   );
