@@ -14,6 +14,8 @@ interface ticketProps {
   title: string;
   status: string;
   sound: string;
+  clicked?: boolean;
+  onClick?: (e: any) => void;
 }
 
 export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
