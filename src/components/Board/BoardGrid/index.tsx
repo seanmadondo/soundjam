@@ -4,7 +4,7 @@ import { Ticket } from "../../Ticket";
 
 import { useRootStore } from "../../../stores/RootStateContext";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 //============= Radomiser functions =================
 function swap(ticketList, i, j) {
@@ -26,11 +26,6 @@ function shuffle(ticketList, length) {
 export const BoardGrid = observer(() => {
   const ticketStore = useRootStore();
 
-  const empty: string[] = [];
-  const [openSounds, setOpenSounds] = useState(empty);
-  // const [clearedSounds, setClearedSounds] = useState({});
-  // const [moves, setMoves] = useState(0);
-
   useEffect(() => {
     ticketStore.ticketStore.getTickets();
     ticketStore.ticketStore.getScore();
@@ -38,14 +33,6 @@ export const BoardGrid = observer(() => {
 
   const ticketCount = ticketStore.ticketStore.length;
   const ticketList = shuffle(ticketStore.ticketStore.getTickets(), ticketCount);
-
-  const handleCardClick = (index) => {
-    if (openSounds.length === 1) {
-      setOpenSounds((prev) => [...prev, index]);
-    } else {
-      setOpenSounds([index]);
-    }
-  };
 
   return (
     <Container
@@ -61,7 +48,6 @@ export const BoardGrid = observer(() => {
           title={ticket.title}
           status={ticket.status}
           sound={ticket.sound}
-          onClick={handleCardClick}
         />
       ))}
     </Container>

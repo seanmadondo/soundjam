@@ -7,6 +7,7 @@ import {
   CardContent,
   CardActions,
 } from "@material-ui/core";
+import { useState } from "react";
 
 import J from "../../images/J.png";
 
@@ -14,11 +15,17 @@ interface ticketProps {
   title: string;
   status: string;
   sound: string;
-  clicked?: boolean;
-  onClick?: (e: any) => void;
+  //onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  //const [completed, setCompleted] = useState(false);
+
+  const handleCardClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <Box>
       <Card
@@ -28,12 +35,14 @@ export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
           fontFamily: "Baloo 2",
           marginLeft: "10px",
           marginBottom: "10px",
+          backgroundColor: open ? "#FF914D" : "white",
           "&:hover": {
             transform: "scale(1.02)",
             boxShadow: "0 1px 3px 3px #FF914D",
             transition: "all 0.3s",
           },
         }}
+        onClick={handleCardClick}
       >
         <CardHeader title="" disableTypography />
         <CardContent>
