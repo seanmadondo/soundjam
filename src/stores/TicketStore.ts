@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { Ticket } from "./store.types";
 import { TicketData } from "./TicketData";
 
@@ -11,12 +11,10 @@ export class TicketStore {
     makeAutoObservable(this);
   }
 
-  @action
   getTickets() {
     return this.tickets;
   }
 
-  @action
   getScore() {
     return this.score;
   }

@@ -23,7 +23,7 @@ function shuffle(ticketList, length) {
 }
 //====================================================
 
-export const BoardGrid = observer(() => {
+export const TicketGrid = observer(() => {
   const ticketStore = useRootStore();
 
   useEffect(() => {
@@ -45,6 +45,7 @@ export const BoardGrid = observer(() => {
       {ticketList.map((ticket) => (
         <Ticket
           key={ticket.id}
+          id={ticket.id}
           title={ticket.title}
           status={ticket.status}
           sound={ticket.sound}

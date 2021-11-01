@@ -12,15 +12,14 @@ import { useState } from "react";
 import J from "../../images/J.png";
 
 interface ticketProps {
+  id: number;
   title: string;
   status: string;
   sound: string;
-  //onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
   const [open, setOpen] = useState(false);
-  //const [completed, setCompleted] = useState(false);
 
   const handleCardClick = () => {
     setOpen(!open);

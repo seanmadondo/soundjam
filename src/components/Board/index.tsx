@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 import { Paper, Box } from "@material-ui/core";
 import HelpIcon from "@material-ui/icons/Help";
-import { BoardGrid } from "../Board/BoardGrid";
+import { TicketGrid } from "./TicketGrid";
 
 export const Board = (): JSX.Element => {
   return (
@@ -40,7 +40,7 @@ export const Board = (): JSX.Element => {
             />
           </div>
         </div>
-        <BoardGrid />
+        <TicketGrid />
       </Paper>
     </Box>
   );
