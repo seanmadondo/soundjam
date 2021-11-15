@@ -13,13 +13,13 @@ export const TicketData = [
   },
   {
     id: 2,
-    title: "hi-hat-closed",
+    title: "kick",
     status: "todo",
     sound: "",
   },
   {
     id: 3,
-    title: "hi-hat-open",
+    title: "snare",
     status: "todo",
     sound: "",
   },
@@ -37,19 +37,19 @@ export const TicketData = [
   },
   {
     id: 6,
-    title: "tom1",
+    title: "crash",
     status: "todo",
     sound: "",
   },
   {
     id: 7,
-    title: "tom2",
+    title: "ride",
     status: "todo",
     sound: "",
   },
   {
     id: 8,
-    title: "floor-tom",
+    title: "china",
     status: "todo",
     sound: "",
   },

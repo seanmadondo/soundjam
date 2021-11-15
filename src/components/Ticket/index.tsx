@@ -8,21 +8,63 @@ import {
   CardActions,
 } from "@material-ui/core";
 import { useState } from "react";
-
 import J from "../../images/J.png";
 
 interface ticketProps {
   id: number;
   title: string;
-  status: string;
-  sound: string;
+  status?: string;
+  sound?: string;
 }
 
-export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
-  const [open, setOpen] = useState(false);
+var OPEN_CARDS_LIST: string[] = [];
+
+const evaluateOpenCards = (cardList: string[]) => {
+  return cardList[0] === cardList[1] ? true : false;
+};
+
+const setCardState = (color) => {
+  //3 states = closed (white), open (orange), complete (green), wrong (red)
+
+  switch (color) {
+    case "green":
+      return "#00FF00";
+    case "red":
+      return "ff0000";
+    case "open":
+      return "#FF914D";
+    default:
+      return "white";
+  }
+};
+
+export const Ticket = ({
+  id,
+  title,
+  status,
+  sound,
+}: ticketProps): JSX.Element => {
+  const [cardOpen, setCardOpen] = useState(false);
+
+  //Things to do onclick
+  // - change color of clicked card
+  // - add id to openCards
+  // - allow one more move
+
+  //On 2 clicks
+  // add id to openCards
+  // - evaluate the 2 cards
+  // - reset moves or mark as completed
 
   const handleCardClick = () => {
-    setOpen(!open);
+    if (OPEN_CARDS_LIST.length < 1 && !OPEN_CARDS_LIST.includes(title)) {
+      setCardOpen(!cardOpen);
+      OPEN_CARDS_LIST.push(title);
+    } else {
+      setCardOpen(!cardOpen);
+      OPEN_CARDS_LIST.push(title);
+      console.log(OPEN_CARDS_LIST);
+    }
   };
 
   return (
@@ -34,7 +76,7 @@ export const Ticket = ({ title, status, sound }: ticketProps): JSX.Element => {
           fontFamily: "Baloo 2",
           marginLeft: "10px",
           marginBottom: "10px",
-          backgroundColor: open ? "#FF914D" : "white",
+          backgroundColor: cardOpen ? "#FF914D" : "white",
           "&:hover": {
             transform: "scale(1.02)",
             boxShadow: "0 1px 3px 3px #FF914D",

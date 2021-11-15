@@ -4,7 +4,7 @@ import { Ticket } from "../../Ticket";
 
 import { useRootStore } from "../../../stores/RootStateContext";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 //============= Radomiser functions =================
 function swap(ticketList, i, j) {
@@ -34,6 +34,10 @@ export const TicketGrid = observer(() => {
   const ticketCount = ticketStore.ticketStore.length;
   const ticketList = shuffle(ticketStore.ticketStore.getTickets(), ticketCount);
 
+  const handleClick = (id) => {
+    //console.log(id);
+  };
+
   return (
     <Container
       css={{
@@ -43,13 +47,14 @@ export const TicketGrid = observer(() => {
       }}
     >
       {ticketList.map((ticket) => (
-        <Ticket
-          key={ticket.id}
-          id={ticket.id}
-          title={ticket.title}
-          status={ticket.status}
-          sound={ticket.sound}
-        />
+        <div onClick={() => handleClick(ticket.id)} key={ticket.id}>
+          <Ticket
+            id={ticket.id}
+            title={ticket.title}
+            status={ticket.status}
+            sound={ticket.sound}
+          />
+        </div>
       ))}
     </Container>
   );
