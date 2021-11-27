@@ -7,23 +7,23 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 
 //============= Radomiser functions =================
-function swap(ticketList, i, j) {
-  const temp = ticketList[i];
-  ticketList[i] = ticketList[j];
-  ticketList[j] = temp;
-}
+// function swap(ticketList, i, j) {
+//   const temp = ticketList[i];
+//   ticketList[i] = ticketList[j];
+//   ticketList[j] = temp;
+// }
 
-function shuffle(ticketList, length) {
-  for (let i = length; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * i);
-    const currentIndex = i - 1;
-    swap(ticketList, currentIndex, randomIndex);
-  }
-  return ticketList;
-}
+// function shuffle(ticketList, length) {
+//   for (let i = length; i > 0; i--) {
+//     const randomIndex = Math.floor(Math.random() * i);
+//     const currentIndex = i - 1;
+//     swap(ticketList, currentIndex, randomIndex);
+//   }
+//   return ticketList;
+// }
 //====================================================
 
-export const TicketGrid = observer(() => {
+export const TicketGrid = () => {
   const ticketStore = useRootStore();
 
   useEffect(() => {
@@ -31,12 +31,38 @@ export const TicketGrid = observer(() => {
     ticketStore.ticketStore.getScore();
   }, [ticketStore]);
 
-  const ticketCount = ticketStore.ticketStore.length;
-  const ticketList = shuffle(ticketStore.ticketStore.getTickets(), ticketCount);
+  //const ticketCount = ticketStore.ticketStore.length;
+  const ticketList = ticketStore.ticketStore.getTickets();
 
-  const handleClick = (id) => {
-    //console.log(id);
+  const [tickets, setTickets] = useState(ticketList);
+  const [openTickets, setOpenTickets] = useState<number[]>([]);
+  const [moves, setMoves] = useState(0);
+
+  //check if both the cards have the same type
+  const evaluate = () => {
+    const [first, second] = openTickets;
+    if (tickets[first].title === tickets[second].title) {
+      setOpenTickets([]);
+      console.log("matched");
+    } else {
+      console.log("not matched");
+    }
   };
+
+  const handleClick = (id: number) => {
+    if (openTickets.length === 1) {
+      setOpenTickets((prev) => [...prev, id]);
+      setMoves((moves) => moves + 1);
+    } else {
+      setOpenTickets([id]);
+    }
+  };
+
+  useEffect(() => {
+    if (openTickets.length === 2) {
+      evaluate();
+    }
+  }, [openTickets]);
 
   return (
     <Container
@@ -46,8 +72,8 @@ export const TicketGrid = observer(() => {
         flexWrap: "wrap",
       }}
     >
-      {ticketList.map((ticket) => (
-        <div onClick={() => handleClick(ticket.id)} key={ticket.id}>
+      {tickets.map((ticket) => (
+        <div key={ticket.id} onClick={() => handleClick(ticket.id)}>
           <Ticket
             id={ticket.id}
             title={ticket.title}
@@ -58,4 +84,4 @@ export const TicketGrid = observer(() => {
       ))}
     </Container>
   );
-});
+};

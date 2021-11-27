@@ -57,7 +57,7 @@ export const NavigationBar = ({ score }: NavigationBarProps): JSX.Element => {
                 fontFamily: "'Baloo 2', cursive",
               }}
             >
-              Score:
+              Moves:
             </div>
           </Toolbar>
           <Toolbar>
