@@ -17,6 +17,7 @@ import theme from "./Styles/theme";
 import { NavigationBar } from "./components/NavigationBar";
 import { Board } from "./components/Board";
 import { useRootStore } from "./stores/RootStateContext";
+import { observer } from "mobx-react-lite";
 
 //========================================================================================
 //Apollo Client setup for API
@@ -34,28 +35,28 @@ const createApolloClient = () => {
 };
 //========================================================================================
 
-const App = () => {
+const App = observer(() => {
   const client = createApolloClient();
   const ticketStore = useRootStore();
 
   useEffect(() => {
-    ticketStore.ticketStore.getScore();
+    ticketStore.ticketStore.getMoves();
   }, [ticketStore]);
 
-  const score = ticketStore.ticketStore.getScore();
+  const moves = ticketStore.ticketStore.getMoves();
 
   return (
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <Container maxWidth="lg">
-            <NavigationBar score={score} />
+            <NavigationBar moves={moves} />
             <Board />
           </Container>
         </ThemeProvider>
       </MuiThemeProvider>
     </ApolloProvider>
   );
-};
+});
 
 export default App;

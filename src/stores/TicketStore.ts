@@ -4,18 +4,22 @@ import { TicketData } from "./TicketData";
 
 export class TicketStore {
   tickets: Ticket[] = TicketData;
-  score = 0;
+  moves = 0;
   length = this.tickets.length;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getTickets() {
+  public getTickets() {
     return this.tickets;
   }
 
-  getScore() {
-    return this.score;
+  public updateMoves(moves: number) {
+    this.moves = moves;
+  }
+
+  public getMoves() {
+    return this.moves;
   }
 }

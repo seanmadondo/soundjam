@@ -15,6 +15,7 @@ interface ticketProps {
   title: string;
   status?: string;
   sound?: string;
+  isOpen?: boolean;
 }
 
 export const Ticket = ({
@@ -22,13 +23,8 @@ export const Ticket = ({
   title,
   status,
   sound,
+  isOpen,
 }: ticketProps): JSX.Element => {
-  // const evaluateOpenCards = (cardList: string[]) => {
-  //   if (cardList[0] === cardList[1]) {
-  //     switchColor("completed");
-  //   }
-  // };
-
   // const switchColor = (state) => {
   //   //3 states = closed (white), open (orange), complete (green), wrong (red)
   //   switch (state) {
@@ -37,7 +33,7 @@ export const Ticket = ({
   //     case "incorrect":
   //       return "ff0000";
   //     case "open":
-  //       return "#FF914D";
+  //       return "#FAB588";
   //     default:
   //       return "white"; //original state
   //   }
@@ -52,16 +48,15 @@ export const Ticket = ({
           fontFamily: "Baloo 2",
           marginLeft: "10px",
           marginBottom: "10px",
-          //backgroundColor: cardOpen ? "#FF914D" : "white",
+          backgroundColor: isOpen ? "#FAB588" : "white",
           //backgroundColor: switchColor(cardState),
-          backgroundColor: "white",
+          // backgroundColor: "white",
           "&:hover": {
             transform: "scale(1.02)",
             boxShadow: "0 1px 3px 3px #FF914D",
             transition: "all 0.3s",
           },
         }}
-        //onClick={handleCardClick}
       >
         <CardHeader title="" disableTypography />
         <CardContent>
