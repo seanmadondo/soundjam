@@ -25,19 +25,18 @@ export const Ticket = ({
   sound,
   isOpen,
 }: ticketProps): JSX.Element => {
-  // const switchColor = (state) => {
-  //   //3 states = closed (white), open (orange), complete (green), wrong (red)
-  //   switch (state) {
-  //     case "completed":
-  //       return "#00FF00";
-  //     case "incorrect":
-  //       return "ff0000";
-  //     case "open":
-  //       return "#FAB588";
-  //     default:
-  //       return "white"; //original state
-  //   }
-  // };
+  const switchColorByState = (state) => {
+    switch (state) {
+      case "completed":
+        return "#BABABA";
+      case "incorrect":
+        return "ff0000";
+      case "open":
+        return "#FAB588";
+      default:
+        return "white"; //default state
+    }
+  };
 
   return (
     <Box>
@@ -48,9 +47,7 @@ export const Ticket = ({
           fontFamily: "Baloo 2",
           marginLeft: "10px",
           marginBottom: "10px",
-          backgroundColor: isOpen ? "#FAB588" : "white",
-          //backgroundColor: switchColor(cardState),
-          // backgroundColor: "white",
+          backgroundColor: isOpen ? "#FAB588" : switchColorByState(status),
           "&:hover": {
             transform: "scale(1.02)",
             boxShadow: "0 1px 3px 3px #FF914D",

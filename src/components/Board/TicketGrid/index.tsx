@@ -34,34 +34,51 @@ export const TicketGrid = () => {
 
   const [tickets, setTickets] = useState(ticketList);
   const [openTickets, setOpenTickets] = useState<number[]>([]);
+  const [completedTickets, setCompletedTickets] = useState({});
   const [moves, setMoves] = useState(movesDisplay);
   const timeout = useRef<number>(0);
-
-  //check if both the cards have the same type
-  const evaluate = () => {
-    const [first, second] = openTickets;
-    if (tickets[first].title === tickets[second].title) {
-      setOpenTickets([]);
-      console.log("matched");
-      return;
-    }
-
-    setOpenTickets([]);
-    clearTimeout(timeout.current);
-  };
 
   const checkIsOpen = (id) => {
     return openTickets.includes(id);
   };
 
-  const handleClick = (id: number) => {
-    if (openTickets.length === 1) {
-      setOpenTickets((prev) => [...prev, id]);
-      setMoves((moves) => moves + 1);
-      ticketStore.ticketStore.updateMoves(moves + 1);
+  const checkIsCompleted = (ticket) => {
+    return Boolean(completedTickets[ticket.title]);
+  };
+
+  const handleClick = (ticket) => {
+    if (checkIsCompleted(ticket) !== true) {
+      if (openTickets.length === 1) {
+        setOpenTickets((prev) => [...prev, ticket.id]);
+        setMoves((moves) => moves + 1);
+        ticketStore.ticketStore.updateMoves(moves + 1);
+      } else {
+        setOpenTickets([ticket.id]);
+      }
     } else {
-      setOpenTickets([id]);
+      return;
     }
+  };
+
+  //check if both the cards have the same type
+  const evaluate = () => {
+    const [first, second] = openTickets;
+    if (
+      tickets[first].title === tickets[second].title &&
+      tickets[first].id !== tickets[second].id
+    ) {
+      tickets[first].status = "completed";
+      tickets[second].status = "completed";
+      setCompletedTickets((prev) => ({
+        ...prev,
+        [tickets[first].title]: true,
+      }));
+      setOpenTickets([]);
+      return;
+    }
+
+    setOpenTickets([]);
+    clearTimeout(timeout.current);
   };
 
   useEffect(() => {
@@ -79,7 +96,7 @@ export const TicketGrid = () => {
       }}
     >
       {tickets.map((ticket) => (
-        <div key={ticket.id} onClick={() => handleClick(ticket.id)}>
+        <div key={ticket.id} onClick={() => handleClick(ticket)}>
           <Ticket
             id={ticket.id}
             title={ticket.title}
