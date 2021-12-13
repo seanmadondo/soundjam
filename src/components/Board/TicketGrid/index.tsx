@@ -3,6 +3,7 @@ import { Container } from "@material-ui/core";
 import { Ticket } from "../../Ticket";
 import { useRootStore } from "../../../stores/RootStateContext";
 import { useEffect, useState, useRef } from "react";
+import { Howl, Howler } from "howler";
 
 //============= Radomiser functions =================
 // function swap(ticketList, i, j) {
@@ -21,6 +22,8 @@ import { useEffect, useState, useRef } from "react";
 // }
 //====================================================
 
+const kick = require("../../../sounds/kick.wav");
+
 export const TicketGrid = () => {
   const ticketStore = useRootStore();
 
@@ -37,28 +40,6 @@ export const TicketGrid = () => {
   const [completedTickets, setCompletedTickets] = useState({});
   const [moves, setMoves] = useState(movesDisplay);
   const timeout = useRef<number>(0);
-
-  const checkIsOpen = (id) => {
-    return openTickets.includes(id);
-  };
-
-  const checkIsCompleted = (ticket) => {
-    return Boolean(completedTickets[ticket.title]);
-  };
-
-  const handleClick = (ticket) => {
-    if (checkIsCompleted(ticket) !== true) {
-      if (openTickets.length === 1) {
-        setOpenTickets((prev) => [...prev, ticket.id]);
-        setMoves((moves) => moves + 1);
-        ticketStore.ticketStore.updateMoves(moves + 1);
-      } else {
-        setOpenTickets([ticket.id]);
-      }
-    } else {
-      return;
-    }
-  };
 
   //check if both the cards have the same type
   const evaluate = () => {
@@ -79,6 +60,32 @@ export const TicketGrid = () => {
 
     setOpenTickets([]);
     clearTimeout(timeout.current);
+  };
+
+  const checkIsOpen = (id) => {
+    return openTickets.includes(id);
+  };
+
+  const checkIsCompleted = (ticket) => {
+    return Boolean(completedTickets[ticket.title]);
+  };
+
+  const handleClick = (ticket) => {
+    const sound = new Howl({
+      src: [kick],
+    });
+    sound.play();
+    if (checkIsCompleted(ticket) !== true) {
+      if (openTickets.length === 1) {
+        setOpenTickets((prev) => [...prev, ticket.id]);
+        setMoves((moves) => moves + 1);
+        ticketStore.ticketStore.updateMoves(moves + 1);
+      } else {
+        setOpenTickets([ticket.id]);
+      }
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
